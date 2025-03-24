@@ -14,9 +14,7 @@
          (bind ?*min* ?v)
       )
    )
+   (printout t "menor: " ?*min* crlf)
 )
 
-(defrule mostrar-minimo
-   (declare (salience -10))
-   =>
-   (printout t "menor: " ?*min* crlf))
+

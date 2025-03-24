@@ -17,4 +17,4 @@
 (defrule mostrar-suma
    (declare (salience -10))
    =>
-   (printout t "La suma total es: " ?*suma* crlf))
+   (printout t "suma: " ?*suma* crlf))
