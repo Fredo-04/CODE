@@ -53,3 +53,23 @@ es_hermana_de(X,Y) :- mujer(X), es_papa_de(Z,X), es_papa_de(Z,Y), X \= Y,
     write(X), write(' y '), write(Y), write(' son hermanos.').
 es_hermana_de(X,Y) :- mujer(X), es_mama_de(Z,X), es_mama_de(Z,Y), X \= Y,
     write(X), write(' y '), write(Y), write(' son hermanos.').
+
+es_abuelo_de(X, Y) :- hombre(X), es_papa_de(X, Z),
+    (es_papa_de(Z, Y); es_mama_de(Z, Y)).
+es_abuela_de(X, Y) :- mujer(X), es_mama_de(X, Z),
+    (es_papa_de(Z, Y); es_mama_de(Z, Y)).
+
+es_tio_de(X, Y) :- hombre(X), es_papa_de(Z, Y),
+    (es_hermano_de(X, Z); es_hermano_de(X, Z)).
+es_tia_de(X, Y) :- mujer(X), es_papa_de(Z, Y),
+    (es_hermana_de(X, Z); es_hermana_de(X, Z)).
+
+es_primo_de(X, Y) :- hombre(X), es_papa_de(A, X),
+    es_papa_de(B, Y), es_hermano_de(A, B).
+es_primo_de(X, Y) :- hombre(X), es_mama_de(A, X),
+    es_mama_de(B, Y), es_hermana_de(A, B).
+
+es_prima_de(X, Y) :- mujer(X), es_papa_de(A, X),
+    es_papa_de(B, Y), es_hermano_de(A, B).
+es_prima_de(X, Y) :- mujer(X), es_mama_de(A, X),
+    es_mama_de(B, Y), es_hermana_de(A, B).
