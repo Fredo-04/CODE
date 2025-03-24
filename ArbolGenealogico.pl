@@ -64,12 +64,28 @@ es_tio_de(X, Y) :- hombre(X), es_papa_de(Z, Y),
 es_tia_de(X, Y) :- mujer(X), es_papa_de(Z, Y),
     (es_hermana_de(X, Z); es_hermana_de(X, Z)).
 
-es_primo_de(X, Y) :- hombre(X), es_papa_de(A, X),
-    es_papa_de(B, Y), es_hermano_de(A, B).
-es_primo_de(X, Y) :- hombre(X), es_mama_de(A, X),
-    es_mama_de(B, Y), es_hermana_de(A, B).
+es_primo_de(X, Y) :-
+    hombre(X),
+    es_papa_de(P1, X), es_papa_de(P2, Y), es_hermano_de(P1, P2).
+es_primo_de(X, Y) :-
+    hombre(X),
+    es_mama_de(M1, X), es_mama_de(M2, Y), es_hermana_de(M1, M2).
+es_primo_de(X, Y) :-
+    hombre(X),
+    es_papa_de(P1, X), es_mama_de(M2, Y), es_hermano_de(P1, M2).
+es_primo_de(X, Y) :-
+    hombre(X),
+    es_mama_de(M1, X), es_papa_de(P2, Y), es_hermana_de(M1, P2).
 
-es_prima_de(X, Y) :- mujer(X), es_papa_de(A, X),
-    es_papa_de(B, Y), es_hermano_de(A, B).
-es_prima_de(X, Y) :- mujer(X), es_mama_de(A, X),
-    es_mama_de(B, Y), es_hermana_de(A, B).
+es_prima_de(X, Y) :-
+    mujer(X),
+    es_papa_de(P1, X), es_papa_de(P2, Y), es_hermano_de(P1, P2).
+es_prima_de(X, Y) :-
+    mujer(X),
+    es_mama_de(M1, X), es_mama_de(M2, Y), es_hermana_de(M1, M2).
+es_prima_de(X, Y) :-
+    mujer(X),
+    es_papa_de(P1, X), es_mama_de(M2, Y), es_hermano_de(P1, M2).
+es_prima_de(X, Y) :-
+    mujer(X),
+    es_mama_de(M1, X), es_papa_de(P2, Y), es_hermana_de(M1, P2).
