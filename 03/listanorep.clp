@@ -6,13 +6,17 @@
    (vector1 $?lista1)
    (vector2 $?lista2)
    =>
-   (bind ?union (create$))
+   (bind ?union (create$)) ; Inicializa el conjunto vacío
    (foreach ?elemento ?lista1
-      )))
-)
+      (if (member$ (create$ ?elemento) ?lista2) then
+         (if (not (member$ (create$ ?elemento) ?union)) then
+            (bind ?union (create$ ?union ?elemento)) ; Agrega el elemento a la unión
+         )
+      )
+   )
+   (assert (union ?union))) ; Inserta la unión en la base de hechos
 
 (defrule mostrar-union
    (union $?resultado)
    =>
    (printout t "Union: " ?resultado crlf))
-
